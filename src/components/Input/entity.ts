@@ -1,9 +1,11 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { LegacyRef } from 'react'
+
 export interface InputProps {
-  type: 'input' | 'textArea'
-  value: string
+  refValue: LegacyRef<HTMLInputElement>
+  inputType: string
   placeholder?: string
   label?: string
-  prefixIcon?: string
-  suffixIcon?: string
-  inputType?: string
+  prefixIcon?: IconProp
+  suffixIcon?: IconProp
 }
