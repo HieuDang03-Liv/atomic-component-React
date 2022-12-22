@@ -7,7 +7,7 @@ const Button: FC<PropsWithChildren<ButtonProps>> = (props) => {
     <div>
       <button
         type={props.type ?? 'button'}
-        className="bg-cyan-500 rounded-md w-96 py-2 text-white flex justify-center items-center gap-2"
+        className="bg-cyan-500 rounded-lg w-full py-4 text-white flex justify-center items-center gap-2 outline-cyan-700 hover:bg-cyan-600"
       >
         {props.icon ? (
           <span>

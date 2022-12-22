@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Input: FC<InputProps> = (props) => {
   return (
     <div className="relative">
-      <label className="absolute top-0 -translate-y-full">{props.label}</label>
+      <label className="absolute -translate-y-full">{props.label}</label>
       <input
         ref={props.refValue}
         type={props.inputType}
         placeholder={props.placeholder}
-        className="border rounded-md px-4 py-2 ring-offset-1 focus:ring-2 focus:ring-cyan-500 w-96 outline-none placeholder:text-sm"
+        className="border rounded-lg px-4 py-2 ring-offset-1 focus:ring-2 focus:ring-cyan-500 w-full outline-none placeholder:text-sm"
       />
       {props.prefixIcon ? (
         <span>
@@ -22,6 +22,7 @@ const Input: FC<InputProps> = (props) => {
           <FontAwesomeIcon icon={props.suffixIcon} />
         </span>
       ) : null}
+      <p className="text-red-500 absolute text-sm translate-y-1">{props.errorMessage}</p>
     </div>
   )
 }

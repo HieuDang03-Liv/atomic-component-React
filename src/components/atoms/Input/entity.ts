@@ -8,4 +8,5 @@ export interface InputProps {
   label?: string
   prefixIcon?: IconProp
   suffixIcon?: IconProp
+  errorMessage?: string
 }
