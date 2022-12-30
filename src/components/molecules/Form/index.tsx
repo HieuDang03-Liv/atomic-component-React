@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { ChangeEvent, FC, useRef, useState } from 'react'
 import { faAt, faLock, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import Input from '../../atoms/Input'
 import Button from '../../atoms/Button'
@@ -7,6 +7,12 @@ import Checkbox from '../../atoms/Checkbox'
 const Form: FC = () => {
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+  const [isKeepLogged, setIsKeepLogged] = useState<boolean>(true)
+
+  const handleCheckedKeepLogged = (event: ChangeEvent<HTMLInputElement>): void => {
+    const checked = event.target.checked
+    setIsKeepLogged(checked)
+  }
 
   return (
     <form className="bg-white w-1/4 h-2/3 rounded-lg flex flex-col px-8 drop-shadow-2xl">
@@ -30,7 +36,9 @@ const Form: FC = () => {
           label="Password"
           placeholder="Enter password"
         ></Input>
-        <Checkbox name="keep-logged">Keep me logged</Checkbox>
+        <Checkbox name="keep-logged" checkedState={isKeepLogged} setCheckedState={handleCheckedKeepLogged}>
+          Keep me logged
+        </Checkbox>
         <Button icon={faRightFromBracket} type="submit">
           log in
         </Button>
