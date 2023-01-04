@@ -7,6 +7,8 @@
 body {
   min-height: 100vh;
   /* font-family: 'Chivo Mono', monospace;  */
-  background-color: #0093e9;
-  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+  /* background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%); */
+  background-image: url('./assets/winter-blue-pink-gradient-background-vector_53876-117276.webp');
+  background-size: cover;
 }

@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Option: FC<PropsWithChildren<OptionProps>> = (props) => {
   return (
-    <div className="ml-4 flex justify-start items-center gap-2 max-w-fit pl-1 pr-6 py-1 rounded-md hover:bg-hoverGray">
-      <div className="h-6 w-6 rounded-md bg-white flex items-center justify-center p-2 text-cyan-500 ring-1 ring-gray-400">
-        <FontAwesomeIcon icon={props.icon}></FontAwesomeIcon>
+    <div
+      role="menuitem"
+      className={`flex items-center gap-2 pl-2 pr-6 py-1 cursor-pointer ${
+        props.children ? 'hover:bg-hoverGray w-full' : 'max-w-fit'
+      }`}
+      onClick={() => props.handleSelecting && props.handleSelecting()}
+    >
+      <div className={`flex items-center justify-center p-2 ${props.isSelected ? 'text-cyan-500' : 'text-slate-500'}`}>
+        <FontAwesomeIcon icon={props.icon} size={!props.children ? '2x' : '1x'}></FontAwesomeIcon>
       </div>
-      <span>{props.children}</span>
+      <span className={`${props.isSelected ? 'text-cyan-500' : 'text-slate-500'} font-semibold`}>{props.children}</span>
     </div>
   )
 }

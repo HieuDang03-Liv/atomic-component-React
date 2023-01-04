@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useRef, useState } from 'react'
 import { faAt, faLock, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
-import Input from '../../atoms/Input'
-import Button from '../../atoms/Button'
-import Checkbox from '../../atoms/Checkbox'
+import Input from '@atoms/Input'
+import Checkbox from '@atoms/Checkbox'
+import Button from '@atoms/Button'
 
 const Form: FC = () => {
   const usernameRef = useRef<HTMLInputElement>(null)
@@ -40,7 +40,7 @@ const Form: FC = () => {
           Keep me logged
         </Checkbox>
         <Button icon={faRightFromBracket} type="submit">
-          log in
+          Log in
         </Button>
       </div>
     </form>

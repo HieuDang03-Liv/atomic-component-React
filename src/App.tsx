@@ -1,13 +1,13 @@
 import { Fragment } from 'react'
 import './App.css'
 import LoginPage from './pages/Login'
-import DropDown from './components/molecules/DropDown'
+import HeaderBar from './components/organisms/HeaderBar'
 
 function App() {
   return (
     <Fragment>
+      <HeaderBar></HeaderBar>
       <LoginPage></LoginPage>
-      <DropDown></DropDown>
     </Fragment>
   )
 }
