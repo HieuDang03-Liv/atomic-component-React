@@ -9,5 +9,5 @@ export interface ItemOption {
   name: string
   icon: IconProp
   title: string
-  isSelected?: boolean
+  isSelected: boolean
 }

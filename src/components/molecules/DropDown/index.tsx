@@ -3,28 +3,36 @@ import Option from '@atoms/Option'
 import { DropDownProps, ItemOption } from './entity'
 import useOutsideClickingDetect from '@hooks/useOutsideClickingDetect'
 
-const DropDown: FC<DropDownProps> = ({ items }) => {
-  const initSelected = items.find((item) => item.isSelected) ?? items[0]
+const DropDown: FC<DropDownProps> = ({ items, handleDropDown }) => {
+  const initSelected = items.find((item) => item.isSelected === true) ?? items[0]
   const [selectedOption, setSelectedOption] = useState<ItemOption>(initSelected)
-  const selectedOptionName = selectedOption.name
-  const selectedOptionIcon = selectedOption.icon
 
   const dropDownRef = useRef<HTMLDivElement>(null)
   const [isOutside, setIsOutside] = useOutsideClickingDetect(dropDownRef)
 
-  const handleSelectingOption = (selected: ItemOption): void => {
+  function handleSelectingOption(selected: ItemOption): void {
     items.forEach((item) => {
       item.isSelected = false
     })
+
+    const matchedTitle = items.find((item) => item.title === selected.title)
+    if (matchedTitle) {
+      matchedTitle.isSelected = true
+    }
+
     selected.isSelected = true
     setSelectedOption(selected)
+
+    if (handleDropDown) {
+      handleDropDown()
+    }
   }
 
   return (
     <Fragment>
       <div className="w-32 relative" ref={dropDownRef}>
         <button onClick={() => setIsOutside((pre) => !pre)}>
-          <Option name={selectedOptionName} icon={selectedOptionIcon} isSelected={true}></Option>
+          <Option name={selectedOption.name} icon={selectedOption.icon} isSelected={selectedOption.isSelected}></Option>
         </button>
         <div
           className={`w-32 py-1 bg-white rounded-md ring-1 ring-slate-500 flex flex-col items-center justify-between absolute ${
@@ -37,7 +45,7 @@ const DropDown: FC<DropDownProps> = ({ items }) => {
               icon={option.icon}
               isSelected={option.isSelected}
               key={option.title}
-              handleSelecting={() => handleSelectingOption(option)}
+              handleSelecting={handleSelectingOption}
             >
               {option.title}
             </Option>

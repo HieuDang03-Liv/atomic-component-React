@@ -1,14 +1,13 @@
-import { Fragment } from 'react'
 import './App.css'
 import LoginPage from './pages/Login'
 import HeaderBar from './components/organisms/HeaderBar'
 
 function App() {
   return (
-    <Fragment>
+    <div className="bg-lightTheme dark:bg-darkTheme bg-cover">
       <HeaderBar></HeaderBar>
       <LoginPage></LoginPage>
-    </Fragment>
+    </div>
   )
 }
 

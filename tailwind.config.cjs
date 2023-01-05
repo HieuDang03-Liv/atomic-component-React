@@ -5,6 +5,10 @@ module.exports = {
     extend: {
       backgroundColor: {
         hoverGray: '#c1c1c19e'
+      },
+      backgroundImage: {
+        darkTheme: 'url("./src/assets/dark-theme.webp")',
+        lightTheme: 'url("./src/assets/light-theme.webp")'
       }
     }
   },
