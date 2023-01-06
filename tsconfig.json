@@ -23,7 +23,8 @@
       "@common/*": ["common/*"],
       "@hooks/*": ["hooks/*"],
       "@molecules/*": ["components/molecules/*"],
-      "@organisms/*": ["components/organisms/*"]
+      "@organisms/*": ["components/organisms/*"],
+      "@pages/*": ["pages/*"]
     }
   },
   "include": ["src"],

@@ -10,7 +10,10 @@ const Input: FC<InputProps> = (props) => {
         ref={props.refValue}
         type={props.inputType}
         placeholder={props.placeholder}
-        className="border rounded-lg px-4 py-2 ring-offset-1 focus:ring-2 focus:ring-cyan-500 w-full outline-none placeholder:text-sm"
+        className={`border rounded-lg px-4 py-2 ring-offset-1 focus:ring-2 focus:ring-cyan-500 w-full outline-none placeholder:text-sm ${
+          props.errorMessage ? 'ring-2 ring-red-500 focus:ring-red-500' : ''
+        }`}
+        {...props.handleValidateForm}
       />
       {props.prefixIcon ? (
         <span>

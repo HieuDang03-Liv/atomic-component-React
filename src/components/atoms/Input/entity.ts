@@ -9,4 +9,6 @@ export interface InputProps {
   prefixIcon?: IconProp
   suffixIcon?: IconProp
   errorMessage?: string
+  isRequired?: boolean
+  handleValidateForm: any
 }

@@ -1,4 +1,4 @@
-import Form from '../../components/molecules/Form'
+import Form from '@molecules/Form'
 
 const LoginPage = () => {
   return (
