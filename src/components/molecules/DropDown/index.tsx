@@ -11,15 +11,18 @@ const DropDown: FC<DropDownProps> = ({ items, handleDropDown }) => {
   const [isOutside, setIsOutside] = useOutsideClickingDetect(dropDownRef)
 
   function handleSelectingOption(selected: ItemOption): void {
+    //set all options's ['isSelected'] False
     items.forEach((item) => {
       item.isSelected = false
     })
 
+    //then set clicked option's ['isSelected'] True
     const matchedTitle = items.find((item) => item.title === selected.title)
     if (matchedTitle) {
       matchedTitle.isSelected = true
     }
 
+    //update State to rerender UI
     selected.isSelected = true
     setSelectedOption(selected)
 

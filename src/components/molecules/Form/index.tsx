@@ -4,32 +4,51 @@ import Input from '@atoms/Input'
 import Checkbox from '@atoms/Checkbox'
 import Button from '@atoms/Button'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { LoginInfo } from '@configs/api/services/Users/entity'
+import { Exception, LoginInfo } from '@configs/api/services/Users/entity'
 import { UsersService } from '@configs/api/services/Users'
+import { AxiosError } from 'axios'
+import { login } from '@configs/state/usersSlice'
+import useAppSelector from '@hooks/useAppSelector'
+import useAppDispatch from '@hooks/useAppDispatch'
 
 const Form: FC = () => {
+  const loggedUser = useAppSelector((state) => state.users)
+  const dispatch = useAppDispatch()
+
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const [isKeepLogged, setIsKeepLogged] = useState<boolean>(true)
-
   const handleCheckedKeepLogged = (event: ChangeEvent<HTMLInputElement>): void => {
     const checked = event.target.checked
     setIsKeepLogged(checked)
   }
 
+  //form validation
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<LoginInfo>()
-
   const usernameRegister = register('username', { required: 'Required email/username' })
   const passwordRegister = register('password', { required: 'Required password' })
 
+  //event after submiting
   const onHandleSubmit: SubmitHandler<LoginInfo> = (data) => {
     const usersService = new UsersService()
-    usersService.login({ username: data.username, password: data.password }).subscribe()
+    usersService.login({ username: data.username, password: data.password }).subscribe({
+      next: (res) => {
+        dispatch(login(res))
+        console.log(loggedUser)
+      },
+      error: (err: AxiosError) => {
+        const errResponseData = err.response?.data as Exception
+        const errMessage = errResponseData?.message
+        setErrorMsg(errMessage)
+      }
+    })
   }
+
+  const [errorMsg, setErrorMsg] = useState<string>('')
 
   return (
     <form
@@ -63,9 +82,12 @@ const Form: FC = () => {
         <Checkbox name="keep-logged" checkedState={isKeepLogged} setCheckedState={handleCheckedKeepLogged}>
           Keep me logged
         </Checkbox>
-        <Button icon={faRightFromBracket} type="submit">
-          Log in
-        </Button>
+        <div className="relative">
+          <p className="text-red-500 absolute text-sm -top-1/2">{errorMsg}</p>
+          <Button icon={faRightFromBracket} type="submit">
+            Log in
+          </Button>
+        </div>
       </div>
     </form>
   )
