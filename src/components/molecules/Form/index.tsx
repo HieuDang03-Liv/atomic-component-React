@@ -8,11 +8,10 @@ import { Exception, LoginInfo } from '@configs/api/services/Users/entity'
 import { UsersService } from '@configs/api/services/Users'
 import { AxiosError } from 'axios'
 import { login } from '@configs/state/usersSlice'
-import useAppSelector from '@hooks/useAppSelector'
 import useAppDispatch from '@hooks/useAppDispatch'
+import { setJwtToken } from '@common/utility/authToken'
 
 const Form: FC = () => {
-  const loggedUser = useAppSelector((state) => state.users)
   const dispatch = useAppDispatch()
 
   const usernameRef = useRef<HTMLInputElement>(null)
@@ -38,7 +37,9 @@ const Form: FC = () => {
     usersService.login({ username: data.username, password: data.password }).subscribe({
       next: (res) => {
         dispatch(login(res))
-        console.log(loggedUser)
+        if (res.accessToken) {
+          setJwtToken(res.accessToken)
+        }
       },
       error: (err: AxiosError) => {
         const errResponseData = err.response?.data as Exception

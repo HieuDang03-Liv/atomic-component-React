@@ -4,11 +4,11 @@ export interface LoginInfo {
 }
 
 export interface VerifiedUser {
-  username: string
-  accessToken: string
-  refreshToken: string
-  expiresAccessDate: Date
-  expiresRefreshDate: Date
+  username: string | null
+  accessToken: string | null
+  refreshToken: string | null
+  expiresAccessDate: Date | null
+  expiresRefreshDate: Date | null
 }
 
 export interface Exception {
